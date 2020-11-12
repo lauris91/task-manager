@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Components/App';
 import reportWebVitals from './reportWebVitals';
+import { EasybaseProvider } from 'easybase-react';
+import ebconfig from "./ebconfig.json";
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
-  
-    <App />,
-  
+  <EasybaseProvider ebconfig={ebconfig}>
+    <App />
+  </EasybaseProvider>,
   document.getElementById('root')
 );
 
