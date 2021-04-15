@@ -1,0 +1,24 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@for $i from 1 through 100 {
+  .margin-right-#{$i} {
+    margin-right: #{$i}px;
+  }
+  .margin-left-#{$i} {
+    margin-right: #{$i}px;
+  }
+  .margin-bottom-#{$i} {
+    margin-right: #{$i}px;
+  }
+  .margin-top-#{$i} {
+    margin-right: #{$i}px;
+  }
+}
+
+.text-color {
+  &-blue {
+    color: $button-color;
+  }
+}

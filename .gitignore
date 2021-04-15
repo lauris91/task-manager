@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /src/ebconfig.json
+/src/blog-samanta-firebase-adminsdk-rz1gf-58b10a0950.json
 
 # testing
 /coverage
