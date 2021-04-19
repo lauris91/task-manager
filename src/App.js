@@ -20,7 +20,7 @@ function App() {
             </div>
           </>
         ) : (
-          <div className="calendar-container">
+          <div className="calendar-wrapper">
             <Calendar />
           </div>
         )}

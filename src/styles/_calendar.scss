@@ -1,0 +1,154 @@
+.calendar-container {
+  width: 100%;
+  border: 1px solid $main-light-color;
+  border-radius: 10px;
+  overflow: auto;
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(195px, 1fr));
+    grid-template-rows: 57px;
+    grid-auto-rows: 120px;
+    font-weight: 700;
+
+    &-cell {
+      display: flex;
+      box-sizing: border-box;
+      flex-direction: column;
+    }
+
+    .day-name {
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      color: $main-light-color;
+      border-top: none;
+      border-bottom: none;
+      border-left: 1px solid $main-light-color;
+
+      &:nth-child(1) {
+        border-left: none;
+      }
+    }
+
+    .day {
+      justify-content: start;
+      align-items: start;
+      padding: 15px;
+      font-size: 13px;
+      border-top: 1px solid $main-light-color;
+      border-left: 1px solid $main-light-color;
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{($i * 7) + 1}) {
+          border-left: none;
+        }
+      }
+
+      &.project {
+        width: 100%;
+        height: 100%;
+        border-left-width: 4px;
+        border-left-style: solid;
+        font-weight: 700;
+        transition: ease-out 0.2s background, color;
+
+        span {
+          color: black;
+        }
+
+        ul {
+          font-size: 10px;
+          padding-left: 15px;
+          margin-top: 5px;
+        }
+
+        .department-name,
+        .check-square {
+          display: none;
+        }
+
+        &-design {
+          background: #eeeffd;
+          border-left-color: $button-color;
+          color: $button-color;
+        }
+
+        &-marketing {
+          border-left-color: $violet;
+          color: $violet;
+          background: #f5eafd;
+        }
+
+        &-development {
+          color: $yellow;
+          border-left-color: $yellow;
+          background: #fef6e8;
+        }
+
+        &-management {
+          color: $red;
+          border-left-color: $red;
+          background: #fee9ec;
+        }
+
+        &:hover {
+          transform: scale(1.3);
+          animation: fadeInHover 0.2s ease-in;
+          background: $button-color;
+          border-left: none;
+          border-top: none;
+          border-radius: 10px;
+          color: white;
+
+          ul {
+            color: white;
+            padding-top: 0px;
+            margin: 5px 0px;
+            font-size: 8px;
+          }
+
+          .department-name,
+          .check-square {
+            display: block;
+            color: white;
+            font-size: 9px;
+          }
+
+          .check-square {
+            text-align: end;
+          }
+
+          span {
+            color: white;
+          }
+
+          &.project-design {
+            background-color: $button-color;
+          }
+
+          &.project-marketing {
+            background-color: $violet;
+          }
+
+          &.project-development {
+            background-color: $yellow;
+          }
+
+          &.project-management {
+            background-color: $red;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeInHover {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.3);
+  }
+}

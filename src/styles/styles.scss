@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700');
 @import 'variables';
 @import 'helpers';
+@import 'calendar';
 
 body {
   font-family: 'Jost', sans-serif;
@@ -9,7 +10,8 @@ body {
   margin: 0;
 }
 
-input {
+input,
+button {
   border: none;
 
   &::placeholder {
@@ -26,11 +28,6 @@ h5 {
   margin: 0px;
 }
 
-// [type='checkbox'] {
-//   position: absolute;
-//   left: -9999px;
-// }
-
 .wrapper {
   display: grid;
   grid-template-columns: 25% 75%;
@@ -43,6 +40,7 @@ h5 {
 
   @media (max-width: 1130px) {
     grid-template-columns: 100%;
+    grid-template-rows: 18%;
     grid-template-areas:
       'head'
       'main';
@@ -77,6 +75,10 @@ header {
     justify-content: space-between;
     padding: 0px 60px;
     align-items: center;
+
+    @media (max-width: 1130px) {
+      flex-basis: 100%;
+    }
 
     input.search {
       margin-left: 10px;
@@ -193,7 +195,6 @@ header {
     align-items: center;
   }
 }
-// }
 
 img.user {
   width: 40px;
@@ -439,12 +440,6 @@ img.user {
   grid-area: main;
   overflow: hidden;
   display: flex;
-  // animation: fadeIn 1.5s ease;
-
-  // .main-box-container {
-  //   display: flex;
-  //   animation: fadeIn 1.5s ease;
-  // }
 
   .inbox-container {
     width: 40%;
@@ -472,6 +467,7 @@ img.user {
         border-bottom: 1px solid $border-color;
         box-sizing: border-box;
         justify-content: space-between;
+        animation: fadeInButtom 1.5s ease;
 
         &--border-violet {
           border-left: 5px solid $violet;
@@ -727,12 +723,92 @@ img.user {
     }
   }
 
-  .calendar-container {
+  .calendar-wrapper {
+    width: 100%;
     padding: 30px 50px;
     animation: fadeInButtom 1.5s ease;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 
     &-header {
-      color: red;
+      height: 30px;
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      font-weight: 600;
+      font-size: 12px;
+      margin-bottom: 30px;
+
+      .week-month {
+        height: 100%;
+        border-radius: 20px;
+
+        & button {
+          border: none;
+          width: 50%;
+          height: 30px;
+          color: $button-color;
+          font-weight: 600;
+          font-size: 12px;
+          cursor: pointer;
+          background: none;
+
+          &.week,
+          &.month {
+            width: 65px;
+            border-bottom: $button-border;
+            border-top: $button-border;
+          }
+
+          &.week {
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-left: $button-border;
+          }
+
+          &.month {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-right: $button-border;
+          }
+
+          &.weekends,
+          &.add-task {
+            border-radius: 20px;
+            border: 1px solid $main-light-color;
+            color: $main-light-color;
+            width: 100px;
+          }
+
+          &.add-task {
+            margin-left: 15px;
+          }
+
+          &.active {
+            background: $button-color;
+            color: #fff;
+            border: $button-border;
+          }
+        }
+      }
+
+      .month-info {
+        font-weight: 600;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .current-month {
+          font-size: 15px;
+        }
+
+        .current-year {
+          color: $main-light-color;
+          font-size: 12px;
+        }
+      }
     }
   }
 
@@ -757,8 +833,4 @@ img.user {
       transform: translateY(0px);
     }
   }
-
-  // @media (max-width: 1130px) {
-  // border: 1px solid yellow;
-  // }
 }

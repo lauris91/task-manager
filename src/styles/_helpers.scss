@@ -17,8 +17,22 @@
   }
 }
 
+@for $i from 1 through 100 {
+  .w#{$i}p {
+    width: percentage($i / 100);
+  }
+}
+
 .text-color {
   &-blue {
     color: $button-color;
+  }
+
+  &-grey {
+    color: $main-light-color;
+  }
+
+  &-default {
+    color: black;
   }
 }
