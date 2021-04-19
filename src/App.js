@@ -4,11 +4,18 @@ import { Header, Userbox, Inbox, Mail, Calendar } from './Components'
 
 function App() {
   const [navItem, setNavItem] = useState(false)
+  const [color, setColor] = useState('#4d76fd')
 
   return (
     <div className="wrapper">
-      <Header navItem={navItem} setNavItem={setNavItem} />
-      <Userbox />
+      <Header
+        navItem={navItem}
+        setNavItem={setNavItem}
+        color={color}
+        setColor={setColor}
+      />
+      {/* <div className="page-content"> */}
+      <Userbox color={color} />
       <div className="main-box">
         {!navItem ? (
           <>
@@ -24,6 +31,7 @@ function App() {
             <Calendar />
           </div>
         )}
+        {/* </div> */}
       </div>
     </div>
   )

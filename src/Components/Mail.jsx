@@ -21,7 +21,7 @@ export default () => (
         src="https://assets.codepen.io/3364143/Screen+Shot+2020-08-01+at+12.24.16.png"
         alt="yo"
       />
-      <span>Nathalie Williams</span>
+      <span>Natalie Smith</span>
       <div className="action-buttons">
         <div className="btn cursor-pointer">
           <FontAwesomeIcon icon={faTrash} color="#4d76fd" />

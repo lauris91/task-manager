@@ -2,12 +2,18 @@
 @import 'variables';
 @import 'helpers';
 @import 'calendar';
+@import 'mixins';
+
+html {
+  height: 100%;
+}
 
 body {
   font-family: 'Jost', sans-serif;
   font-size: 15px;
   overflow: hidden;
   margin: 0;
+  min-height: 100%;
 }
 
 input,
@@ -30,7 +36,7 @@ h5 {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 30% 70%;
   grid-template-areas:
     'head head'
     'user main';
@@ -38,9 +44,12 @@ h5 {
   overflow: hidden;
   height: 100vh;
 
-  @media (max-width: 1130px) {
+  @include breakpoint(1070px) {
+    grid-template-columns: 35% 65%;
+  }
+
+  @include breakpoint(870px) {
     grid-template-columns: 100%;
-    grid-template-rows: 18%;
     grid-template-areas:
       'head'
       'main';
@@ -60,23 +69,28 @@ header {
   text-transform: uppercase;
   border-bottom: 1px solid $border-color;
 
+  @include breakpoint(530px) {
+    height: 37px;
+  }
+
   .task-manager-header {
-    flex-basis: 25%;
+    flex-basis: 30%;
     text-align: center;
 
-    @media (max-width: 1130px) {
+    @include breakpoint(870px) {
       display: none;
     }
   }
 
   .main-area-header {
-    flex-basis: 75%;
+    flex-basis: 70%;
     display: flex;
     justify-content: space-between;
-    padding: 0px 60px;
+    padding: 0px 30px;
     align-items: center;
+    box-sizing: border-box;
 
-    @media (max-width: 1130px) {
+    @include breakpoint(870px) {
       flex-basis: 100%;
     }
 
@@ -84,11 +98,18 @@ header {
       margin-left: 10px;
       font-weight: 600;
       font-family: inherit;
-      // border: none;
       color: $main-light-color;
       font-size: 14px;
       padding-left: 30px;
-      background: url('../images/zoom.svg') no-repeat left center;
+      margin-left: 0px;
+
+      @media (min-width: 530px) {
+        background: url('../images/zoom.svg') no-repeat left center;
+      }
+
+      @include breakpoint(530px) {
+        display: none;
+      }
     }
 
     .nav {
@@ -154,7 +175,7 @@ header {
             & + label {
               left: 50%;
               right: 8px;
-              background: $button-color;
+              background: var(--button-color);
 
               transition: left 0.5s, right 0.5s;
             }
@@ -174,7 +195,7 @@ header {
               left: 8px;
               right: 50%;
 
-              background: $button-color;
+              background: var(--button-color);
 
               transition: left 0.5s, right 0.5s, background 0.35s;
             }
@@ -182,17 +203,37 @@ header {
         }
       }
     }
-  }
 
-  .theame-button {
-    width: 36px;
-    height: 36px;
-    background-color: $button-color;
-    border-radius: 50%;
-    align-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .theame-button {
+      width: 36px;
+      height: 36px;
+      background-color: var(--button-color);
+      border-radius: 50%;
+      align-self: center;
+      cursor: pointer;
+      position: relative;
+
+      .icon {
+        position: absolute;
+        left: 28%;
+        top: 28%;
+      }
+
+      .colorpicker {
+        position: absolute;
+        opacity: 0;
+        background-color: var(--button-color);
+        border-radius: 100%;
+        height: 36px;
+        width: 36px;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+
+      @include breakpoint(530px) {
+        justify-self: flex-end;
+      }
+    }
   }
 }
 
@@ -209,10 +250,6 @@ img.user {
   flex-direction: column;
   flex-shrink: 0;
   overflow: auto;
-
-  @media (max-width: 1130px) {
-    display: none;
-  }
 
   .side-wrapper {
     padding: 25px 40px;
@@ -279,10 +316,8 @@ img.user {
           width: 20px;
           height: 20px;
           align-self: center;
+          color: var(--button-color);
         }
-
-        // .notification {
-        //   position: relative;
 
         .notification {
           position: absolute;
@@ -318,7 +353,7 @@ img.user {
       background-color: $main-light-color;
 
       &--bar {
-        background-color: $button-color;
+        background-color: var(--button-color);
         border-radius: 4px;
         width: 35%;
         height: 100%;
@@ -395,7 +430,7 @@ img.user {
         }
 
         &-blue {
-          border-color: $button-color;
+          border-color: var(--button-color);
         }
 
         &-yellow {
@@ -431,7 +466,7 @@ img.user {
   box-sizing: border-box;
 
   &-answered {
-    background-color: $button-color;
+    background-color: var(--button-color);
     border: none;
   }
 }
@@ -439,15 +474,24 @@ img.user {
 .main-box {
   grid-area: main;
   overflow: hidden;
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: 'inbox mail';
+  grid-template-rows: 100%;
+
+  @include breakpoint(1070px) {
+    grid-template-columns: 100%;
+    grid-template-areas: 'mail';
+  }
 
   .inbox-container {
-    width: 40%;
+    grid-area: inbox;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-right: 1px $border-color solid;
-    // animation: fadeIn 1.5s ease;
+    box-sizing: border-box;
+    overflow: auto;
 
     .inbox {
       width: 100%;
@@ -474,7 +518,7 @@ img.user {
         }
 
         &--border-blue {
-          border-left: 5px solid $button-color;
+          border-left: 5px solid var(--button-color);
         }
       }
 
@@ -531,7 +575,7 @@ img.user {
       button {
         font-weight: 600;
         color: #fff;
-        background-color: $button-color;
+        background-color: var(--button-color);
         width: 150px;
         height: 36px;
         line-height: 36px;
@@ -542,7 +586,7 @@ img.user {
   }
 
   .mail-container {
-    width: 60%;
+    grid-area: mail;
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -564,12 +608,13 @@ img.user {
       img {
         width: 42px;
         height: 42px;
-        margin-right: 15px;
+        margin-right: 10px;
       }
 
       span {
         font-weight: 500;
         font-size: 14px;
+        white-space: nowrap;
       }
 
       .action-buttons {
@@ -587,6 +632,14 @@ img.user {
 
           &:not(:first-child) {
             margin-left: 10px;
+
+            @include breakpoint(1270px) {
+              display: none;
+            }
+
+            @include breakpoint(1070px) {
+              display: flex;
+            }
           }
         }
       }
@@ -696,7 +749,7 @@ img.user {
 
       .email-textarea {
         width: 100%;
-        padding: 20px 20px;
+        padding-left: 20px;
         border-right: 1px solid $border-color;
         display: flex;
         align-items: center;
@@ -717,7 +770,7 @@ img.user {
         justify-content: center;
 
         &-send {
-          background-color: $button-color;
+          background-color: var(--button-color);
         }
       }
     }
@@ -748,7 +801,7 @@ img.user {
           border: none;
           width: 50%;
           height: 30px;
-          color: $button-color;
+          color: var(--button-color);
           font-weight: 600;
           font-size: 12px;
           cursor: pointer;
@@ -786,7 +839,7 @@ img.user {
           }
 
           &.active {
-            background: $button-color;
+            background: var(--button-color);
             color: #fff;
             border: $button-border;
           }

@@ -1,0 +1,24 @@
+$size1: 1270px;
+$size2: 1070px;
+$size3: 870px;
+$size4: 530px;
+
+@mixin breakpoint($size) {
+  @if $size == $size1 {
+    @media only screen and (max-width: $size1) {
+      @content;
+    }
+  } @else if $size == $size2 {
+    @media only screen and (max-width: $size2) {
+      @content;
+    }
+  } @else if $size == $size3 {
+    @media only screen and (max-width: $size3) {
+      @content;
+    }
+  } @else if $size == $size4 {
+    @media only screen and (max-width: $size4) {
+      @content;
+    }
+  }
+}

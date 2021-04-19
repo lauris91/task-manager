@@ -1,7 +1,7 @@
 $title-color: #979dc3;
 $border-color: #e5e4e9;
 $main-light-color: #a1a4b9;
-$button-color: #4d76fd;
+// var(--button-color): #4d76fd;
 $main-color: #7a7e9d;
 $email-button: #eaeefc;
 
@@ -10,4 +10,8 @@ $violet: #b36dfb;
 $yellow: #fec267;
 $light-grey: #f1f2f7;
 
-$button-border: 1px solid $button-color;
+$button-border: 1px solid var(--button-color);
+
+:root {
+  --button-color: #4d76fd;
+}
