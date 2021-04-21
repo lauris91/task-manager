@@ -36,13 +36,15 @@ h5 {
 
 .wrapper {
   display: grid;
+  grid-template-columns: 100%;
   grid-template-columns: 30% 70%;
   grid-template-areas:
     'head head'
     'user main';
+  grid-template-rows: 70px calc(100vh - 70px);
   background-color: #fff;
   overflow: hidden;
-  height: 100vh;
+  // height: 100vh;
 
   @include breakpoint(1070px) {
     grid-template-columns: 35% 65%;
@@ -54,6 +56,10 @@ h5 {
       'head'
       'main';
   }
+
+  @include breakpoint(530px) {
+    grid-template-rows: 37px calc(100vh - 37px);
+  }
 }
 
 header {
@@ -64,14 +70,9 @@ header {
   z-index: 222;
   font-weight: 700;
   color: $title-color;
-  height: 70px;
   line-height: 70px;
   text-transform: uppercase;
   border-bottom: 1px solid $border-color;
-
-  @include breakpoint(530px) {
-    height: 37px;
-  }
 
   .task-manager-header {
     flex-basis: 30%;
@@ -95,13 +96,12 @@ header {
     }
 
     input.search {
-      margin-left: 10px;
+      width: 10%;
       font-weight: 600;
       font-family: inherit;
       color: $main-light-color;
       font-size: 14px;
       padding-left: 30px;
-      margin-left: 0px;
 
       @media (min-width: 530px) {
         background: url('../images/zoom.svg') no-repeat left center;
@@ -334,7 +334,6 @@ img.user {
           align-items: center;
           justify-content: center;
         }
-        // }
       }
     }
 
@@ -473,25 +472,21 @@ img.user {
 
 .main-box {
   grid-area: main;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-areas: 'inbox mail';
-  grid-template-rows: 100%;
-
-  @include breakpoint(1070px) {
-    grid-template-columns: 100%;
-    grid-template-areas: 'mail';
-  }
+  overflow: auto;
+  display: flex;
 
   .inbox-container {
-    grid-area: inbox;
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-right: 1px $border-color solid;
     box-sizing: border-box;
     overflow: auto;
+
+    @include breakpoint(1070px) {
+      display: none;
+    }
 
     .inbox {
       width: 100%;
@@ -586,13 +581,18 @@ img.user {
   }
 
   .mail-container {
-    grid-area: mail;
+    // grid-area: mail;
+    width: 55%;
     overflow: auto;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     position: relative;
     animation: fadeInRight 1.5s ease;
+
+    @include breakpoint(1070px) {
+      width: 100%;
+    }
 
     .user-row {
       height: 70px;
